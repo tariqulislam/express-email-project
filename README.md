@@ -1,4 +1,4 @@
-Email sending to client is requirment for every mordern project. Sending the email using node js is easy, sending the email with template is most common feature now a days.In this project will build some functionality which will help the developer to configure the email sending functionality using template very easily. I have use the ```express js``` and ```nodemailer``` and my own custom mail configuration to sending the email through ```gmail smtp``` and shared hosting ```email smtp```.
+Email sending to client is requirment for every morden project. Sending email from node js application with template is most common feature now a days.In this project, i have build  functionality which will help the developer to configure the email sending functionality with template very easily. I have use the ```express js``` and ```nodemailer``` and my own custom mail configuration to sending the email through ```gmail smtp``` and shared hosting ```email smtp```.
 
 # Prerequisites
 1. nodemailer
