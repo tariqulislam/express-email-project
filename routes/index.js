@@ -4,17 +4,11 @@ var router = express.Router();
 var MailConfig = require('../config/email');
 var hbs = require('nodemailer-express-handlebars');
 var gmailTransport = MailConfig.GmailTransport;
-MailConfig.ViewOption(gmailTransport,hbs);
-
 var smtpTransport = MailConfig.SMTPTransport;
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 router.get('/email/template', (req, res, next) => {
+  MailConfig.ViewOption(gmailTransport,hbs);
   let HelperOptions = {
     from: '"Tariqul islam" <tariqul.islam.rony@gmail.com>',
     to: 'tariqul@itconquest.com',
@@ -38,6 +32,7 @@ router.get('/email/template', (req, res, next) => {
 });
 
 router.get('/email/smtp/template', (req, res, next) => {
+  MailConfig.ViewOption(smtpTransport,hbs);
   let HelperOptions = {
     from: '"Tariqul islam" <tariqul@falconfitbd.com>',
     to: 'tariqul.islam.rony@gmail.com',
@@ -51,18 +46,14 @@ router.get('/email/smtp/template', (req, res, next) => {
   };
   smtpTransport.verify((error, success) => {
       if(error) {
-        console.log('this is error',error);
-        res.json(error)
+        res.json({output: 'error', message: error})
         res.end();
       } else {
         smtpTransport.sendMail(HelperOptions, (error,info) => {
           if(error) {
-            console.log(error);
-            res.json(error);
+            res.json({output: 'error', message: error})
           }
-          console.log("email is send");
-          console.log(info);
-          res.json(info);
+          res.json({output: 'success', message: info});
           res.end();
         });
       }
