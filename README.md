@@ -1,4 +1,4 @@
-Example Project for Sending the email to Client by with email templating.
+Email sending to client is requirment for every mordern project. Sending the email using node js is easy, sending the email with template is most common feature now a days.In this project will build some functionality which will help the developer to configure the email sending functionality using template very easily. I have use the ```express js``` and ```nodemailer``` and my own custom mail configuration to sending the email through ```gmail smtp``` and shared hosting ```email smtp```.
 
 # Prerequisites
 1. nodemailer
@@ -23,10 +23,22 @@ GMAIL_SERVICE_PORT = 587 # service port
 GMAIL_USER_NAME = <email> # email address
 GMAIL_USER_PASSWORD = <password> # email address password
 ```
+### Add html Template for email templating to ```views/email/test.hbs``` file:
+```html
+<h1>You Node mailer is working</h1>
+<p>
+    Your Name: {{name}}
+    <br/>
+    Your address: {{address}}
+    <br/>
+    Your Email: {{email}}
+</p>
+```
 
-# Send Email By and Create Template
+# Send Email By with email template
 
 For testing purpose, we will create ```get``` request for sending the email through ```Gmail``` smtp
+
 
 ### Configure the gmail to less secure for sending email through gmail account
 1. Turn on the less secure app from this link https://myaccount.google.com/lesssecureapps
