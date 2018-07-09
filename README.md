@@ -23,15 +23,6 @@ GMAIL_SERVICE_PORT = 587 # service port
 GMAIL_USER_NAME = <email> # email address
 GMAIL_USER_PASSWORD = <password> # email address password
 ```
-### For other smtp configuration
-
-```
-SMTP_SERVICE_HOST=<smtp host name>
-SMTP_SERVICE_SECURE=<conection is secure or not>
-SMTP_SERVICE_PORT=<smtp port>
-SMTP_USER_NAME=<email Address>
-SMTP_USER_PASSWORD=<password>
-```
 
 # Send Email By and Create Template
 
@@ -115,11 +106,64 @@ it takes two arguments:
 1. HelperOptions (simple template configuration object)
 2. ```error_first_callback``` function which contains (error, success) arguments
 
-# To function is okay we will use ```postman``` to test the function for mail sending
+### we will use ```postman``` to test the function for mail sending by gmail smtp
 1. From command line or cmd run command: for npm ```npm run start``` for yarn ```yarn start```
 2. Hit the url at ```postman``` with ```get``` request http://localhost:3000/email/template
 3. the result will be:
 ![alt text](https://github.com/tariqulislam/express-email-project/blob/master/gmailtest.jpg)
 
-# Design Form and Send Email
+# Send email through the own SMTP server:
+
+# Send Email By and Create Template
+
+For testing purpose, we will create ```get``` request for sending the email through own smtp server
+
+### For testing purpose i get the custom smtp information from my shared hosting site by ```cpanel```:
+1. Go to Email account sections
+2. Select Email and you will be option ```email client configuration```
+3. Then get the shared hosting smtp account mail server information for account
+4. After that configure the smtp email to ```.env``` file:
+
+### For other smtp configuration
+
+```
+SMTP_SERVICE_HOST=<smtp host name>
+SMTP_SERVICE_SECURE=<conection is secure or not>
+SMTP_SERVICE_PORT=<smtp port>
+SMTP_USER_NAME=<email Address>
+SMTP_USER_PASSWORD=<password>
+```
+## Sample code for sending email by own smtp
+```javascript
+router.get('/email/smtp/template', (req, res, next) => {
+  MailConfig.ViewOption(smtpTransport,hbs);
+  let HelperOptions = {
+    from: '"Tariqul islam" <tariqul@falconfitbd.com>',
+    to: 'tariqul.islam.rony@gmail.com',
+    subject: 'Hellow world!',
+    template: 'test',
+    context: {
+      name:"tariqul_islam",
+      email: "tariqul.islam.rony@gmail.com",
+      address: "52, Kadamtola Shubag dhaka"
+    }
+  };
+  smtpTransport.verify((error, success) => {
+      if(error) {
+        res.json({output: 'error', message: error})
+        res.end();
+      } else {
+        smtpTransport.sendMail(HelperOptions, (error,info) => {
+          if(error) {
+            res.json({output: 'error', message: error})
+          }
+          res.json({output: 'success', message: info});
+          res.end();
+        });
+      }
+  })
+  
+});
+```
+
 
