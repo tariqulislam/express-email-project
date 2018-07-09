@@ -17,6 +17,7 @@ module.exports.SMTPTransport = nodemailer.createTransport({
     host: environment.SMTP_SERVICE_HOST,
     port: environment.SMTP_SERVICE_PORT,
     secure: environment.SMTP_SERVICE_SECURE, // upgrade later with STARTTLS
+    debug: true,
     auth: {
         user: environment.SMTP_USER_NAME,
         pass: environment.SMTP_USER_PASSWORD

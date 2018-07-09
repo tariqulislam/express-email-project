@@ -49,15 +49,25 @@ router.get('/email/smtp/template', (req, res, next) => {
       address: "52, Kadamtola Shubag dhaka"
     }
   };
-  smtpTransport.sendMail(HelperOptions, (error,info) => {
-    if(error) {
-      console.log(error);
-      res.json(error);
-    }
-    console.log("email is send");
-    console.log(info);
-    res.json(info)
-  });
+  smtpTransport.verify((error, success) => {
+      if(error) {
+        console.log('this is error',error);
+        res.json(error)
+        res.end();
+      } else {
+        smtpTransport.sendMail(HelperOptions, (error,info) => {
+          if(error) {
+            console.log(error);
+            res.json(error);
+          }
+          console.log("email is send");
+          console.log(info);
+          res.json(info);
+          res.end();
+        });
+      }
+  })
+  
 });
 
 module.exports = router;
