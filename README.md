@@ -116,8 +116,9 @@ it takes two arguments:
 2. ```error_first_callback``` function which contains (error, success) arguments
 
 # To function is okay we will use ```postman``` to test the function for mail sending
-1. Hit the url at ```postman``` with ```get``` request http://localhost:3000/email/template
-2. the result will be:
+1. From command line or cmd run command: for npm ```npm run start``` for yarn ```yarn start```
+2. Hit the url at ```postman``` with ```get``` request http://localhost:3000/email/template
+3. the result will be:
 ![alt text](https://github.com/tariqulislam/express-email-project/blob/master/gmailtest.jpg)
 
 # Design Form and Send Email
