@@ -40,7 +40,7 @@ For testing purpose, we will create ```get``` request for sending the email thro
 ### Configure the gmail to less secure for sending email through gmail account
 1. Turn on the less secure app from this link https://myaccount.google.com/lesssecureapps
 
-### Then add the ```express-nodmailer-handlebars``` to ```routes->index.js```` and ```email.js``` file from ```config->email.js```
+### Then add the ```express-nodmailer-handlebars``` to ```routes/index.js``` and ```email.js``` file from ```config->email.js```
 
 ```html
 routes/index.js
@@ -114,6 +114,11 @@ gmailTransport.sendMail(HelperOptions, (error,info) => {
 it takes two arguments:
 1. HelperOptions (simple template configuration object)
 2. ```error_first_callback``` function which contains (error, success) arguments
+
+# To function is okay we will use ```postman``` to test the function for mail sending
+1. Hit the url at ```postman``` with ```get``` request http://localhost:3000/email/template
+2. the result will be:
+[!alt text](https://github.com/tariqulislam/express-email-project/gmailtest.jpg)
 
 # Design Form and Send Email
 
