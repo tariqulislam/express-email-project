@@ -120,8 +120,11 @@ For testing purpose, we will create ```get``` request for sending the email thro
 
 ### For testing purpose i get the custom smtp information from my shared hosting site by ```cpanel```:
 1. Go to Email account sections
+![alt text](https://github.com/tariqulislam/express-email-project/blob/master/emailclient2.jpg)
 2. Select Email and you will be option ```email client configuration```
+![alt text](https://github.com/tariqulislam/express-email-project/blob/master/emailclient3.jpg)
 3. Then get the shared hosting smtp account mail server information for account
+![alt text](https://github.com/tariqulislam/express-email-project/blob/master/emailclient1.jpg)
 4. After that configure the smtp email to ```.env``` file:
 
 ### For other smtp configuration
@@ -165,5 +168,55 @@ router.get('/email/smtp/template', (req, res, next) => {
   
 });
 ```
+1. Configure the email template like ```gmailTransport``` by calling ```MailConfig.viewOption()``` method ```MailConfig.ViewOption(smtpTransport,hbs);```
+2. Configure the email template Helper Option Object to sending the email through smtp email:
+```javascript
+  let HelperOptions = {
+    from: '"Tariqul islam" <tariqul@falconfitbd.com>',
+    to: 'tariqul.islam.rony@gmail.com',
+    subject: 'Hellow world!',
+    template: 'test',
+    context: {
+      name:"tariqul_islam",
+      email: "tariqul.islam.rony@gmail.com",
+      address: "52, Kadamtola Shubag dhaka"
+    }
+  };
+```
+```HelperOptions``` object is simple configuration object for email templating
+  1. ```form``` value will be, from which email address sends the email (sender name)
+  2. ```to``` value will be, Receiver email address
+  3. ```subject``` email subject
+  4. ```template``` this will be .hbs template which will be create in ``views/email/``` folder
+  5. ```context``` will the arguments or paramter to send the dynamic value to template
+
+```javascript
+ smtpTransport.verify((error, success) => {
+      if(error) {
+        res.json({output: 'error', message: error})
+        res.end();
+      } else {
+        smtpTransport.sendMail(HelperOptions, (error,info) => {
+          if(error) {
+            res.json({output: 'error', message: error})
+          }
+          res.json({output: 'success', message: info});
+          res.end();
+        });
+      }
+  })
+```
+
+3. ```smtpTransport.verify()``` method will check the smtp sever connection is valid and ping to server to all is okay for server
+4. ```smtpTransport.sendMail``` is work like ```gmailTransport.sendMail``` function
+
+### we will use ```postman``` to test the function for mail sending by own smtp
+1. From command line or cmd run command: for npm ```npm run start``` for yarn ```yarn start```
+2. Hit the url at ```postman``` with ```get``` request http://localhost:3000/email/smtp/template
+3. the result will be:
+![alt text](https://github.com/tariqulislam/express-email-project/blob/master/emailclient5.jpg)
+
+
+
 
 
