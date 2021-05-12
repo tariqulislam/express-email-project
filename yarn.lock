@@ -484,9 +484,9 @@ nodemailer-express-handlebars@^3.0.0:
   dependencies:
     express-handlebars "^3.0.0"
 
-nodemailer@^4.6.7:
-  version "4.6.7"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.6.7.tgz#b68de7f36d65618bdeeeb76234e3547d51266373"
+nodemailer@^6.4.16:
+  version "6.4.16"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.16.tgz#5cb6391b1d79ab7eff32d6f9f48366b5a7117293"
 
 object-keys@^1.0.11, object-keys@^1.0.8:
   version "1.0.12"
